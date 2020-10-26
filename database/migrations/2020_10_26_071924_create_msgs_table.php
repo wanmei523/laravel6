@@ -17,6 +17,7 @@ class CreateMsgsTable extends Migration
             $table->bigIncrements('id');
             $table->string('username',50);
             $table->string('content',255);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
