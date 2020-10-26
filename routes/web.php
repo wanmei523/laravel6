@@ -11,6 +11,10 @@
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/gbook/index','MsgController@index')->name('index');
+Route::get('/gbook/save','MsgController@save')->name('save');
