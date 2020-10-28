@@ -1,2 +1,6 @@
 <?php
-echo 123;
+
+function alert($msg, $type = 'success')
+{
+    session()->flash($type, $msg);
+}
