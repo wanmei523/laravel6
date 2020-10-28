@@ -1,7 +1,7 @@
 <?php 
 
 // session()->flash('success','test');
-alert('ok','danger');
+//alert('ok','danger');
 ?>
 @foreach(['success', 'danger'] as $message)
 @if( session()->has($message) )
