@@ -27,9 +27,23 @@ Route::prefix('admin')->group(function(){
     Route::get('login','Admin\LoginController@login')->name('admin.login');
     Route::post('login','Admin\LoginController@check')->name('admin.login');
     Route::get('logout','Admin\LoginController@logout')->name('admin.logout');
-
+    //需要保护的后台路由列表
     Route::middleware('adminLoginCheck')->group(function(){
+        //后台中心首页
         Route::get('index','Admin\IndexController@index')->name('admin.index');
+        //管理员管理
+        Route::prefix('adminuser')->group(function(){
+            //列表
+            Route::get('/','Admin\AdminUserController@index')->name('admin.adminuser');
+            //添加编辑
+            Route::get('add/{adminuser?}','Admin\AdminUserController@add')->name('admin.adminuser.add');
+            Route::post('add/{adminuser?}','Admin\AdminUserController@save')->name('admin.adminuser.save');
+            //软删除
+            Route::get('remove/{adminuser}','Admin\AdminUserController@remove')->name('admin.adminuser.remove');
+            //切换状态
+            Route::get('state/{adminuser}','Admin\AdminUserController@state')->name('admin.adminuser.state');
+        });
+        
     });
    
 });
