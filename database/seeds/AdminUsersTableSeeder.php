@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\AdminUser;
+use App\Models\Setting;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,8 +19,6 @@ class AdminUsersTableSeeder extends Seeder
             'username'=>'admin',
             'password'=>Hash::make('admin'),
             'state'=>AdminUser::NORMAL
-
         ]);
-
     }
 }
