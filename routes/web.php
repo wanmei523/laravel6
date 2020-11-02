@@ -43,6 +43,11 @@ Route::prefix('admin')->group(function(){
             //切换状态
             Route::get('state/{adminuser}','Admin\AdminUserController@state')->name('admin.adminuser.state');
         });
+        //系统设置
+        Route::prefix('setting')->group(function(){
+            Route::get('/','Admin\SettingController@index')->name('admin.setting');
+            Route::post('/','Admin\SettingController@save')->name('admin.setting');
+        });
         
     });
    

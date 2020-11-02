@@ -27,7 +27,7 @@
   @foreach($adminusers as $adminuser)
     <tr>
       <th scope="row">{{$adminuser->id}}</th>
-      <td>{{$adminuser->username}}</td>
+      <td>{{$adminuser['username']}}</td>
       <td><a onclick='return confirm("确认切换吗?")' href="{{route('admin.adminuser.state',[$adminuser->id])}}">{!!$adminuser->statetext!!}</a></td>
       <td>{{$adminuser->created_at}}</td>
       <td>
