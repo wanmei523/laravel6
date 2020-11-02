@@ -12,7 +12,6 @@
 @page_title(['title' => '系统设置','comment'=>'设置系统相关信息'])
     这里是一个插槽
 @endpage_title
-
 <div class="row">
     <div class="col-12">
         <form method="post" action="{{route('admin.setting')}}">
