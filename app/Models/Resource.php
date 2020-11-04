@@ -12,4 +12,19 @@ class Resource extends Model
     protected $fillable=['adminuser_id','type','title','desc'];
     const VIDEO = 1;
     const DOC = 0;
+
+    public function adminUser(){
+        return $this->belongsTo('App\Models\AdminUser','adminuser_id');
+    }
+
+    public function getTypeNameAttribute()
+    {
+        return config('project.resource.type')[$this->type];
+    }
+    public function resourceVideo(){
+        return $this->hasOne('App\Models\ResourceVideo');
+    }
+    public function resourceDoc(){
+        return $this->hasOne('App\Models\ResourceDoc');
+    }
 }

@@ -48,7 +48,19 @@ Route::prefix('admin')->group(function(){
             Route::get('/','Admin\SettingController@index')->name('admin.setting');
             Route::post('/','Admin\SettingController@save')->name('admin.setting');
         });
-        
+        //课程资源
+        Route::prefix('resource')->group(function(){
+            //列表
+            Route::get('/','Admin\ResourceController@index')->name('admin.resource');
+            //添加
+            Route::get('add/{resource?}','Admin\ResourceController@add')->name('admin.resource.add');
+            //保存
+            Route::post('add/{resource?}','Admin\ResourceController@save')->name('admin.resource.add');
+            //移除
+            Route::get('remove/{resource}','Admin\ResourceController@remove')->name('admin.resource.remove');
+            //编辑器上传
+            Route::get('up','Admin\ResourceController@up')->name('admin.resource.up');
+        });
     });
    
 });
