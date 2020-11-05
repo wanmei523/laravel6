@@ -59,7 +59,7 @@ Route::prefix('admin')->group(function(){
             //移除
             Route::get('remove/{resource}','Admin\ResourceController@remove')->name('admin.resource.remove');
             //编辑器上传
-            Route::get('up','Admin\ResourceController@up')->name('admin.resource.up');
+            Route::post('up','Admin\ResourceController@up')->name('admin.resource.up');
         });
     });
    
