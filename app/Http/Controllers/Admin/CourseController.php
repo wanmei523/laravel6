@@ -12,7 +12,10 @@ class CourseController extends Controller
 {
     //列表
     public function index(Request $request,Course $course){
-        $data=[];
+        $courses = $course->orderBy('sort','asc')->get();
+        $data=[
+            'courses'=>$courses,
+        ];
         return view('admin.course.index',$data);
     }
     //详情
@@ -28,7 +31,11 @@ class CourseController extends Controller
     //课程保存
     public function save(CourseAdd $request,Course $course,File $fileModel){}
     //课程删除
-    public function remove(Request $request,Course $course){}
+    public function remove(Request $request,Course $course){
+        $course->delete();
+        alert('删除成功');
+        return back();
+    }
     //章节添加编辑
     public function chapterAdd(Request $request,Course $course,Chapter $chapter){
         $data=[];
