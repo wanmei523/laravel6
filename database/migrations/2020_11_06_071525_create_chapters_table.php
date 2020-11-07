@@ -20,6 +20,7 @@ class CreateChaptersTable extends Migration
             $table->string('title',255);
             $table->string('desc');
             $table->integer('sort')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

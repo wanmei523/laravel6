@@ -18,7 +18,7 @@ class CreateCoursesTable extends Migration
             $table->integer('adminuser_id')->default(0);
             $table->string('title',255);
             $table->string('desc');
-            $table->string('image');
+            $table->string('image')->default('');
             $table->integer('sort')->default(0);
             $table->timestamps();
             $table->softDeletes();
