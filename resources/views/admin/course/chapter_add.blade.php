@@ -10,7 +10,7 @@
 
 @section('content')
 @page_title(['title' => '章节添加','comment'=>"管理【{$course->title}】的章节"])
-    这里是一个插槽
+<a href="{{route('admin.course.detail',[$course->id])}}" class="btn btn-primary btn-sm">返回课程</a>
 @endpage_title
 
 <div class="row">

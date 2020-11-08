@@ -26,7 +26,7 @@ class CourseController extends Controller
     public function detail(Request $request, Course $course)
     {
         $data = [
-            'course'=>$course,
+            'course' => $course,
         ];
         return view('admin.course.detail', $data);
     }
@@ -46,7 +46,7 @@ class CourseController extends Controller
         //image设置默认空值，否则报错
         //$data['image']='';这里添加以后修改课程头图会丢失，所以只能数据表里面追加默认值
         //设置adminuser_id
-        $data['adminuser_id']=Auth::guard('admin')->id();
+        $data['adminuser_id'] = Auth::guard('admin')->id();
         //文件上传检查
         //是否上传文件和文件有效性
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -73,6 +73,10 @@ class CourseController extends Controller
     //课程删除
     public function remove(Request $request, Course $course)
     {
+        if($course->chapter()->count()>0){
+            alert('删除失败，请先删除旗下章节','danger');
+            return back();
+        }
         $course->delete();
         alert('删除成功');
         return back();
@@ -81,35 +85,63 @@ class CourseController extends Controller
     public function chapterAdd(Course $course, Chapter $chapter)
     {
         $data = [
-            'course'=>$course,
-            'chapter'=>$chapter,
+            'course' => $course,
+            'chapter' => $chapter,
         ];
         return view('admin.course.chapter_add', $data);
     }
     //章节保存
     public function chapterSave(ChapterWrite $request, Course $course, Chapter $chapter)
     {
-        $data=$request->validated();
-        $data['course_id']=$course->id;
-        $data['adminuser_id']=Auth::guard('admin')->id();
-        if($chapter->id){
+        $data = $request->validated();
+        $data['course_id'] = $course->id;
+        $data['adminuser_id'] = Auth::guard('admin')->id();
+        if ($chapter->id) {
             $chapter->update($data);
-        }else{
+        } else {
             $chapter->create($data);
         }
         alert('操作成功');
-        return redirect()->route('admin.course.detail',[$course->id]);
+        return redirect()->route('admin.course.detail', [$course->id]);
     }
     //章节删除
     public function chapterRemove(Request $request, Course $course, Chapter $chapter)
-    { }
+    {
+        if($chapter->resource()->count()>0){
+            alert('删除失败，请先删除旗下资源','danger');
+            return back();
+        }
+        $chapter->delete();
+        alert('章节删除成功');
+        return back();
+    }
     //资源添加编辑
     public function resourceAdd(Request $request, Course $course, Chapter $chapter)
     {
-        $data = [];
+        $data = [
+            'chapter' => $chapter,
+            'course' => $course
+        ];
         return view('admin.course.resource_add', $data);
     }
     //资源保存
     public function resourceSave(Request $request, Course $course, Chapter $chapter)
-    { }
+    {
+        $resource_ids = $request->input('resource_id');
+        $sort = $request->input('sort');
+
+        $post = [];
+        //资源ID或排序ID留空则删除
+        foreach ($resource_ids as $key => $resource_id) {
+            if (!$resource_id || !$sort[$key]) { 
+                continue;
+            }
+            //获取想要的字段结构
+            $post[$resource_id] = ['sort' => $sort[$key]];
+        }
+        //保存中间表
+        $chapter->resource()->sync($post);
+        alert('操作成功');
+        return redirect()->route('admin.course.resource.add', [$course->id, $chapter->id]);
+    }
 }

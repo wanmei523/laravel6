@@ -27,4 +27,7 @@ class Resource extends Model
     public function resourceDoc(){
         return $this->hasOne('App\Models\ResourceDoc');
     }
+    public function chapter(){
+        return $this->belongsToMany('App\Models\Chapter')->withPivot('sort')->withTimestamps();
+    }
 }
