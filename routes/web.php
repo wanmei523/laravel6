@@ -88,6 +88,11 @@ Route::prefix('admin')->group(function(){
                 Route::post('add','Admin\CourseController@resourceSave')->name('admin.course.resource.add');
             });
         });
+        Route::prefix('file')->group(function(){
+                Route::get('/','Admin\FileController@index')->name('admin.file');
+                Route::get('up','Admin\FileController@up')->name('admin.file.up');
+                Route::post('up','Admin\FileController@save')->name('admin.file.up');
+        });
     });
    
 });
