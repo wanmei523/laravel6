@@ -12,12 +12,18 @@
 */
 
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
+//学生首页
+Route::get('/','Index\IndexController@index')->name('index');
+Route::prefix('course')->group(function(){
+    //课程首页
+    Route::get('{course}','Index\CourseController@index')->name('course.index');
+    //课程阅读
+    Route::get('{course}/{resource}','Index\CourseController@resource')->name('course.resource');
 });
-//这个是原来GBOOK的
-Route::get('/gbook/index','MsgController@index')->name('index');
+
+
+//这个是原来GBOOK的，防止冲突暂时首页name的index改成gbook
+Route::get('/gbook/index','MsgController@index')->name('gbook');
 Route::post('/gbook/save','MsgController@save')->name('save');
 
 //这下面是课程管理的

@@ -37,7 +37,7 @@
                 <th width='100'>{{$resource->id}}</th>
                 <th width='100'>{!!$resource->type_name!!}</th>
                 <td>
-                    <a href="#">{{$resource->title}}</a>
+                    <a href="{{route('admin.resource.add',[$resource->id])}}">{{$resource->title}}</a>
                 </td>
             </tr>
             @endforeach
