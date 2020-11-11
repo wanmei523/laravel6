@@ -24,6 +24,6 @@ class MsgController extends Controller
         //获取通过验证的数据
         $postdata = $request->validated();
         $msg->create($postdata);
-        return redirect()->route('index');
+        return redirect()->route('gbookindex');
     }
 }

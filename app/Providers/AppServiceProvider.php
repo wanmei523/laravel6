@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,6 +15,9 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->singleton('App\Models\Setting', function ($app) {
+            return new \App\Models\Setting();
+        });
     }
 
     /**
@@ -24,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Blade::component('admin.components.page_title', 'page_title');
     }
 }
