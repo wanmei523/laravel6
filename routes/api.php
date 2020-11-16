@@ -26,4 +26,8 @@ Route::prefix('v1')->name('api.v1')->namespace('Api')->group(function(){
     })->name('test');
     //测试路由
     Route::post('login','\App\Http\Controllers\Admin\LoginController@check')->name('login');
+    //课程列表
+    Route::get('courses','CourseController@index')->name('courses');
+    //课程信息
+    Route::get('courses/{course}','CourseController@course')->name('course');
 });

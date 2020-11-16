@@ -10,6 +10,7 @@ class Course extends Model
     //
     use SoftDeletes;
     protected $fillable = ['adminuser_id', 'title', 'desc', 'image', 'sort'];
+    //protected $appends = ['image_link'];
     
     //获取图片地址
     public function getImageLinkAttribute()
