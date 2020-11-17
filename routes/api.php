@@ -18,16 +18,21 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::prefix('v1')->name('api.v1')->namespace('Api')->group(function(){
-    Route::get('test',function(){
+Route::prefix('v1')->name('api.v1')->namespace('Api')->group(function () {
+    Route::get('test', function () {
         //abort(403,'大侠我错了');
         //throw new ApiException('大侠我真错了',10086,[],500);
         apiErr('大大大大大侠我错了');
     })->name('test');
     //测试路由
-    Route::post('login','\App\Http\Controllers\Admin\LoginController@check')->name('login');
+    Route::post('login', '\App\Http\Controllers\Admin\LoginController@check')->name('login');
     //课程列表
-    Route::get('courses','CourseController@index')->name('courses');
+    Route::get('courses', 'CourseController@index')->name('courses');
     //课程信息
-    Route::get('courses/{course}','CourseController@course')->name('course');
+    Route::get('courses/{course}', 'CourseController@course')->name('course');
+    //资源
+    Route::get('courses/{course}/resource/{resource}', 'CourseController@resource')->name('resource');
+    //留言板接口
+    Route::get('msgs','MsgController@index')->name('gbookIndex');
+    Route::post('msgs','MsgController@save')->name('gbookSave');
 });

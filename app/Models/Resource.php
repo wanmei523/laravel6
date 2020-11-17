@@ -17,6 +17,7 @@ class Resource extends Model
         return $this->belongsTo('App\Models\AdminUser','adminuser_id');
     }
 
+    //资源类型名字
     public function getTypeNameAttribute()
     {
         return config('project.resource.type')[$this->type];
@@ -29,5 +30,10 @@ class Resource extends Model
     }
     public function chapter(){
         return $this->belongsToMany('App\Models\Chapter')->withPivot('sort')->withTimestamps();
+    }
+    //资源被哪些课程id使用
+    public function getResourceRightsAttribute()
+    {
+        return $this->chapter()->get()->keyBy('course_id')->keys();
     }
 }
