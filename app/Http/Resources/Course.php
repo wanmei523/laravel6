@@ -16,7 +16,6 @@ class Course extends JsonResource
     {
         $data=parent::toArray($request);
         $data['image_link']=$this->image_link;
-        unset($data['created_at']);
         unset($data['updated_at']);
         unset($data['image']);
         $data['chapter']= Chapter::collection($this->whenLoaded('chapter'));

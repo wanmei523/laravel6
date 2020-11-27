@@ -12,7 +12,7 @@ class MsgController extends Controller
 {
     //
     public function index(Msg $msg){
-        $data = $msg->orderBy('id','desc')->paginate(3);
+        $data = $msg->orderBy('id','desc')->paginate(10);
         return AppMsg::collection($data);
     }
 
