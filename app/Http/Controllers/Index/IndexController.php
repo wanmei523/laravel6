@@ -11,7 +11,7 @@ class IndexController extends Controller
     //学生首页
     public function index(Course $course){
         $data=[
-            'courses'=>$course->orderBy('id','desc')->get(),
+            'courses'=>$course->orderBy('id','asc')->get(),
         ];
         return view('index.index',$data);
     }

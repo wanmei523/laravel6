@@ -43,8 +43,8 @@
     <div class='container-fluid'>
         <div class='row mt-3'>
             <div class='col-12 bg-dark p-5 text-center align-middle text-muted'>
-                <p>该软件为【编程实验室】系列课程作品，并作为开源软件。</p>
-                <p>官方网站【<a href="http://www.sodevel.com" class='text-muted'>编程实验室</a>】，作者工作微信：pmtt9121</p>
+                <p>该软件为本人第一次试水作，并作为开源软件。</p>
+                <p>官方网站【<a href="http://www.wxm.show" class='text-muted'>学习的窝</a>】，工作微信：alfie1469</p>
             </div>
         </div>
     </div>

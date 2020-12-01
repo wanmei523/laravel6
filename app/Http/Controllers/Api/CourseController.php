@@ -14,7 +14,7 @@ class CourseController extends Controller
 {
     //
     public function index(Course $course){
-        $courses=$course->orderBy('sort','desc')->get();
+        $courses=$course->orderBy('sort','asc')->get();
         return AppCourse::collection($courses);
         //return new AppCourse(Course::find(1));
     }
